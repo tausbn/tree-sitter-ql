@@ -125,5 +125,5 @@ select i
 
 (ql (moduleMember (select 
   (varDecl (typeExpr (primitiveType)) (varName (simpleId))) 
-  (comp_term (variable (varName (simpleId))) (compop) (expr_annotation (literal (integer))))
+  (comp_term (variable (varName (simpleId))) (compop) (expr_annotation (annotName) (annotName) (literal (integer))))
   (asExprs (asExpr (variable (varName (simpleId))))))))

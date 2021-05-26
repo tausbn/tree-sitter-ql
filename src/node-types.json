@@ -1824,7 +1824,28 @@
   {
     "type": "expr_annotation",
     "named": true,
-    "fields": {},
+    "fields": {
+      "annot_arg": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "annotName",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "annotName",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": false,
       "required": true,

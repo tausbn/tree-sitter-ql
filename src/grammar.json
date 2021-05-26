@@ -2063,16 +2063,24 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_lower_id"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "annotName"
+          }
         },
         {
           "type": "STRING",
           "value": "["
         },
         {
-          "type": "SYMBOL",
-          "name": "_lower_id"
+          "type": "FIELD",
+          "name": "annot_arg",
+          "content": {
+            "type": "SYMBOL",
+            "name": "annotName"
+          }
         },
         {
           "type": "STRING",

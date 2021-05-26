@@ -264,7 +264,15 @@ module.exports = grammar({
 
     par_expr: $ => seq("(", $._exprOrTerm, ")"),
 
-    expr_annotation: $ => seq($._lower_id, "[", $._lower_id, "]", "(", $._exprOrTerm, ")"),
+    expr_annotation: $ => seq(
+      field('name', $.annotName),
+      "[",
+      field('annot_arg',$.annotName),
+      "]",
+      "(", 
+      $._exprOrTerm, 
+      ")",
+    ),
 
     _exprOrTerm: $ => choice(
       $.special_call,

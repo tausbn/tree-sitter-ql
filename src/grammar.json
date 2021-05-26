@@ -2059,6 +2059,39 @@
         }
       ]
     },
+    "expr_annotation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_lower_id"
+        },
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_lower_id"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_exprOrTerm"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
     "_exprOrTerm": {
       "type": "CHOICE",
       "members": [
@@ -2162,6 +2195,10 @@
         {
           "type": "SYMBOL",
           "name": "par_expr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "expr_annotation"
         }
       ]
     },

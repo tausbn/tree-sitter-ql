@@ -112,3 +112,18 @@ select
     (line_comment)
     (asExpr (mul_expr (mul_expr (literal (integer)) (mulop) (literal (integer))) (mulop) (literal (integer))))
     (asExpr (mul_expr (mul_expr (literal (integer)) (mulop) (literal (integer))) (mulop) (literal (integer))))))))
+
+========================
+expression-level pragmas
+========================
+
+from int i
+where i = pragma[only_bind_out](5)
+select i
+
+---
+
+(ql (moduleMember (select 
+  (varDecl (typeExpr (primitiveType)) (varName (simpleId))) 
+  (comp_term (variable (varName (simpleId))) (compop) (expr_annotation (literal (integer))))
+  (asExprs (asExpr (variable (varName (simpleId))))))))

@@ -446,12 +446,12 @@ module.exports = grammar({
 
     db_column: $ => seq(
       field('qldoc',optional($.qldoc)),
-      field('unique', optional($.db_unique)),
+      field('isUnique', optional($.db_unique)),
       field('reprType', $.db_reprType),
       field('colName', $.simpleId),
       ':',
       field('colType', $.db_colType),
-      field('ref', optional($.db_ref)),
+      field('isRef', optional($.db_ref)),
     ),
 
     db_unionDecl: $ => seq(

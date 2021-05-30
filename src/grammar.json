@@ -3211,7 +3211,7 @@
         },
         {
           "type": "FIELD",
-          "name": "unique",
+          "name": "isUnique",
           "content": {
             "type": "CHOICE",
             "members": [
@@ -3255,7 +3255,7 @@
         },
         {
           "type": "FIELD",
-          "name": "ref",
+          "name": "isRef",
           "content": {
             "type": "CHOICE",
             "members": [

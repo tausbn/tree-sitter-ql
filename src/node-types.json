@@ -1775,6 +1775,26 @@
           }
         ]
       },
+      "isRef": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "db_ref",
+            "named": true
+          }
+        ]
+      },
+      "isUnique": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "db_unique",
+            "named": true
+          }
+        ]
+      },
       "qldoc": {
         "multiple": false,
         "required": false,
@@ -1785,32 +1805,12 @@
           }
         ]
       },
-      "ref": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "db_ref",
-            "named": true
-          }
-        ]
-      },
       "reprType": {
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "db_reprType",
-            "named": true
-          }
-        ]
-      },
-      "unique": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "db_unique",
             "named": true
           }
         ]

@@ -4,6 +4,7 @@ module.exports = grammar({
   conflicts: $ => [
     [$.simpleId, $.className],
     [$.simpleId, $.literalId],
+    [$.moduleMember, $.db_entry],
   ],
 
   extras: $ => [
@@ -15,7 +16,7 @@ module.exports = grammar({
   word: $ => $._lower_id,
 
   rules: {
-    ql: $ => repeat($.moduleMember),
+    ql: $ => choice(repeat($.moduleMember), repeat($.db_entry), repeat($.yaml_entry)),
 
     module: $ => seq(
       'module',
@@ -410,6 +411,116 @@ module.exports = grammar({
     super: $ => 'super',
     this: $ => 'this',
     true: $ => 'true',
+
+    // DBscheme stuff below this line
+
+    db_entry: $ => choice(
+      $.db_table,
+      $.db_unionDecl,
+      $.db_caseDecl,
+      $.qldoc,
+    ),
+
+    db_table: $ => seq(
+      repeat($.db_annotation), 
+      field('tableName',$.db_tableName), 
+      '(',
+      sep1($.db_column, ','),
+      ')',
+      optional(';')
+    ),
+
+    db_annotation: $ => choice(
+      seq("#", field('simpleAnnotation', $.annotName)),
+      field('argsAnnotation', $.db_argsAnnotation),
+    ),
+
+    db_argsAnnotation: $ => seq(
+      seq("#", field('name', $.annotName)),
+      '[',
+      sep($.simpleId, ','),
+      ']',
+    ),
+
+    db_tableName: $ => $.simpleId,
+
+    db_column: $ => seq(
+      field('qldoc',optional($.qldoc)),
+      field('unique', optional($.db_unique)),
+      field('reprType', $.db_reprType),
+      field('colName', $.simpleId),
+      ':',
+      field('colType', $.db_colType),
+      field('ref', optional($.db_ref)),
+    ),
+
+    db_unionDecl: $ => seq(
+      field('base', $.dbtype),
+      '=',
+      sep1($.dbtype, '|'),
+      optional(';'),
+    ),
+
+
+    db_caseDecl: $ => seq(
+      $.db_case,
+      field('base', $.dbtype),
+      '.',
+      field('discriminator', $.simpleId),
+      'of',
+      sep1($.db_branch, '|'),
+      optional(';'),
+    ),
+
+    db_branch: $ => seq(
+      field('qldoc', optional($.qldoc)),
+      $.integer,
+      '=',
+      $.dbtype,
+    ),
+
+    db_colType: $ => choice(
+      $.db_int,
+      $.db_float,
+      $.db_boolean,
+      $.db_date,
+      $.db_string,
+      $.dbtype
+    ),
+
+    db_reprType: $ => choice(
+      $.db_int,
+      $.db_float,
+      $.db_boolean,
+      $.db_date,
+      seq($.db_varchar, '(', $.integer, ')'),
+      $.db_string,
+    ),
+
+    db_type : $ => 'type',
+    db_subtype: $ => 'subtype',
+    db_case: $ => 'case',
+    db_of: $ => 'of',
+    db_order: $ => 'order',
+    db_key: $ => 'key',
+    db_ref: $ => 'ref',
+    db_int: $ => 'int',
+    db_float: $ => 'float',
+    db_boolean: $ => 'boolean',
+    db_date: $ => 'date',
+    db_varchar: $ => 'varchar',
+    db_string: $ => 'string',
+    db_unique: $ => 'unique',
+
+// YAML stuff below this line 
+
+    yaml_entry: $ => seq(
+      field('key',$.simpleId),
+      ':', 
+      field('value', $.yaml_value),
+    ),
+
+    yaml_value: $ => /[^\r\n]*/,
   }
 });
 

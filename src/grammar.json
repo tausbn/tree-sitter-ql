@@ -3,11 +3,30 @@
   "word": "_lower_id",
   "rules": {
     "ql": {
-      "type": "REPEAT",
-      "content": {
-        "type": "SYMBOL",
-        "name": "moduleMember"
-      }
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "moduleMember"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "db_entry"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "yaml_entry"
+          }
+        }
+      ]
     },
     "module": {
       "type": "SEQ",
@@ -2987,6 +3006,587 @@
     "true": {
       "type": "STRING",
       "value": "true"
+    },
+    "db_entry": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "db_table"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "db_unionDecl"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "db_caseDecl"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "qldoc"
+        }
+      ]
+    },
+    "db_table": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "db_annotation"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "tableName",
+          "content": {
+            "type": "SYMBOL",
+            "name": "db_tableName"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "db_column"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": ","
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "db_column"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ";"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "db_annotation": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "#"
+            },
+            {
+              "type": "FIELD",
+              "name": "simpleAnnotation",
+              "content": {
+                "type": "SYMBOL",
+                "name": "annotName"
+              }
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "argsAnnotation",
+          "content": {
+            "type": "SYMBOL",
+            "name": "db_argsAnnotation"
+          }
+        }
+      ]
+    },
+    "db_argsAnnotation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "#"
+            },
+            {
+              "type": "FIELD",
+              "name": "name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "annotName"
+              }
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "simpleId"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "simpleId"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "db_tableName": {
+      "type": "SYMBOL",
+      "name": "simpleId"
+    },
+    "db_column": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "qldoc",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "qldoc"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "unique",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "db_unique"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "reprType",
+          "content": {
+            "type": "SYMBOL",
+            "name": "db_reprType"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "colName",
+          "content": {
+            "type": "SYMBOL",
+            "name": "simpleId"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "colType",
+          "content": {
+            "type": "SYMBOL",
+            "name": "db_colType"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "ref",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "db_ref"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "db_unionDecl": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "base",
+          "content": {
+            "type": "SYMBOL",
+            "name": "dbtype"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "dbtype"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "|"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "dbtype"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ";"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "db_caseDecl": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "db_case"
+        },
+        {
+          "type": "FIELD",
+          "name": "base",
+          "content": {
+            "type": "SYMBOL",
+            "name": "dbtype"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "."
+        },
+        {
+          "type": "FIELD",
+          "name": "discriminator",
+          "content": {
+            "type": "SYMBOL",
+            "name": "simpleId"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "of"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "db_branch"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "|"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "db_branch"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ";"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "db_branch": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "qldoc",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "qldoc"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "integer"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dbtype"
+        }
+      ]
+    },
+    "db_colType": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "db_int"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "db_float"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "db_boolean"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "db_date"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "db_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dbtype"
+        }
+      ]
+    },
+    "db_reprType": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "db_int"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "db_float"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "db_boolean"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "db_date"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "db_varchar"
+            },
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SYMBOL",
+              "name": "integer"
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "db_string"
+        }
+      ]
+    },
+    "db_type": {
+      "type": "STRING",
+      "value": "type"
+    },
+    "db_subtype": {
+      "type": "STRING",
+      "value": "subtype"
+    },
+    "db_case": {
+      "type": "STRING",
+      "value": "case"
+    },
+    "db_of": {
+      "type": "STRING",
+      "value": "of"
+    },
+    "db_order": {
+      "type": "STRING",
+      "value": "order"
+    },
+    "db_key": {
+      "type": "STRING",
+      "value": "key"
+    },
+    "db_ref": {
+      "type": "STRING",
+      "value": "ref"
+    },
+    "db_int": {
+      "type": "STRING",
+      "value": "int"
+    },
+    "db_float": {
+      "type": "STRING",
+      "value": "float"
+    },
+    "db_boolean": {
+      "type": "STRING",
+      "value": "boolean"
+    },
+    "db_date": {
+      "type": "STRING",
+      "value": "date"
+    },
+    "db_varchar": {
+      "type": "STRING",
+      "value": "varchar"
+    },
+    "db_string": {
+      "type": "STRING",
+      "value": "string"
+    },
+    "db_unique": {
+      "type": "STRING",
+      "value": "unique"
+    },
+    "yaml_entry": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "key",
+          "content": {
+            "type": "SYMBOL",
+            "name": "simpleId"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "FIELD",
+          "name": "value",
+          "content": {
+            "type": "SYMBOL",
+            "name": "yaml_value"
+          }
+        }
+      ]
+    },
+    "yaml_value": {
+      "type": "PATTERN",
+      "value": "[^\\r\\n]*"
     }
   },
   "extras": [
@@ -3011,6 +3611,10 @@
     [
       "simpleId",
       "literalId"
+    ],
+    [
+      "moduleMember",
+      "db_entry"
     ]
   ],
   "precedences": [],

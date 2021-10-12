@@ -1476,6 +1476,42 @@
     "type": "dataclass",
     "named": true,
     "fields": {
+      "extends": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "extends",
+            "named": false
+          },
+          {
+            "type": "typeExpr",
+            "named": true
+          }
+        ]
+      },
+      "instanceof": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "instanceof",
+            "named": false
+          },
+          {
+            "type": "typeExpr",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -1489,7 +1525,7 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "classMember",
@@ -1497,10 +1533,6 @@
         },
         {
           "type": "typeAliasBody",
-          "named": true
-        },
-        {
-          "type": "typeExpr",
           "named": true
         },
         {
@@ -1973,11 +2005,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "db_unique",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "direction",
@@ -5971,6 +5998,10 @@
     "named": true
   },
   {
+    "type": "db_unique",
+    "named": true
+  },
+  {
     "type": "db_varchar",
     "named": true
   },
@@ -6000,11 +6031,11 @@
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "forall",
@@ -6149,10 +6180,6 @@
   {
     "type": "underscore",
     "named": true
-  },
-  {
-    "type": "unique",
-    "named": false
   },
   {
     "type": "where",

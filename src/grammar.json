@@ -3628,6 +3628,23 @@
         {
           "type": "SYMBOL",
           "name": "yaml_listitem"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "yaml_comment"
+        }
+      ]
+    },
+    "yaml_comment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "# "
+        },
+        {
+          "type": "SYMBOL",
+          "name": "yaml_value"
         }
       ]
     },
@@ -3639,7 +3656,7 @@
           "name": "key",
           "content": {
             "type": "SYMBOL",
-            "name": "simpleId"
+            "name": "yaml_key"
           }
         },
         {
@@ -3653,6 +3670,32 @@
             "type": "SYMBOL",
             "name": "yaml_value"
           }
+        }
+      ]
+    },
+    "yaml_key": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "simpleId"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "simpleId"
+            },
+            {
+              "type": "STRING",
+              "value": "/"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "simpleId"
+            }
+          ]
         }
       ]
     },

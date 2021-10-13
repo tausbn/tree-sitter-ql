@@ -522,13 +522,24 @@ module.exports = grammar({
 
     yaml_entry: $ => choice(
       $.yaml_keyvaluepair,
-      $.yaml_listitem
+      $.yaml_listitem,
+      $.yaml_comment
+    ),
+
+    yaml_comment: $ => seq(
+      "# ", 
+      $.yaml_value
     ),
 
     yaml_keyvaluepair: $ => seq(
-      field('key',$.simpleId),
+      field('key', $.yaml_key),
       ':', 
       field('value', $.yaml_value),
+    ),
+
+    yaml_key: $ => choice(
+      $.simpleId,
+      seq($.simpleId, "/", $.simpleId)
     ),
 
     yaml_listitem: $ => seq(

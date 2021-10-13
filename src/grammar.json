@@ -3693,7 +3693,24 @@
             },
             {
               "type": "SYMBOL",
+              "name": "yaml_key"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
               "name": "simpleId"
+            },
+            {
+              "type": "STRING",
+              "value": "-"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "yaml_key"
             }
           ]
         }

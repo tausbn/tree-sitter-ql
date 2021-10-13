@@ -539,7 +539,8 @@ module.exports = grammar({
 
     yaml_key: $ => choice(
       $.simpleId,
-      seq($.simpleId, "/", $.simpleId)
+      seq($.simpleId, "/", $.yaml_key),
+      seq($.simpleId, "-", $.yaml_key)
     ),
 
     yaml_listitem: $ => seq(

@@ -3619,6 +3619,19 @@
       "value": "unique"
     },
     "yaml_entry": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "yaml_keyvaluepair"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "yaml_listitem"
+        }
+      ]
+    },
+    "yaml_keyvaluepair": {
       "type": "SEQ",
       "members": [
         {
@@ -3640,6 +3653,19 @@
             "type": "SYMBOL",
             "name": "yaml_value"
           }
+        }
+      ]
+    },
+    "yaml_listitem": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "-"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "yaml_value"
         }
       ]
     },

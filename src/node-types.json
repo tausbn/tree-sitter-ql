@@ -5830,6 +5830,25 @@
   {
     "type": "yaml_entry",
     "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "yaml_keyvaluepair",
+          "named": true
+        },
+        {
+          "type": "yaml_listitem",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "yaml_keyvaluepair",
+    "named": true,
     "fields": {
       "key": {
         "multiple": false,
@@ -5851,6 +5870,21 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "yaml_listitem",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "yaml_value",
+          "named": true
+        }
+      ]
     }
   },
   {

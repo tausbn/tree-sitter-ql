@@ -520,10 +520,20 @@ module.exports = grammar({
 
 // YAML stuff below this line 
 
-    yaml_entry: $ => seq(
+    yaml_entry: $ => choice(
+      $.yaml_keyvaluepair,
+      $.yaml_listitem
+    ),
+
+    yaml_keyvaluepair: $ => seq(
       field('key',$.simpleId),
       ':', 
       field('value', $.yaml_value),
+    ),
+
+    yaml_listitem: $ => seq(
+      '-',
+      $.yaml_value
     ),
 
     yaml_value: $ => /[^\r\n]*/,

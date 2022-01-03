@@ -273,6 +273,7 @@ module.exports = grammar({
     set_literal: $ => seq(
       "[",
       sep($._exprOrTerm, ','),
+      optional(','),
       "]"
     ),
 

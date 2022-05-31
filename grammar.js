@@ -89,7 +89,7 @@ module.exports = grammar({
       field("name", $.className),
       choice(
         seq(
-          optional(field("extends", seq('extends', sep1($.typeExpr, ",")))), 
+          optional(field("extends", seq('extends', sep1($.typeExpr, ",")))),
           optional(field("instanceof", seq('instanceof', sep1($.typeExpr, ",")))),
           "{",
           repeat($.classMember),
@@ -108,7 +108,7 @@ module.exports = grammar({
       $.qldoc
     ),
 
-    charpred: $ => seq($.className, "(", ")", "{", field('body',$._exprOrTerm), "}"),
+    charpred: $ => seq($.className, "(", ")", "{", field('body', $._exprOrTerm), "}"),
 
     memberPredicate: $ => seq(
       field("returnType", choice($.predicate, $.typeExpr)),
@@ -192,7 +192,7 @@ module.exports = grammar({
       choice(
         seq(
           sep($.varDecl, ","),
-          optional(seq("|", field('range',$._exprOrTerm), optional(seq("|", field('formula',$._exprOrTerm)))))
+          optional(seq("|", field('range', $._exprOrTerm), optional(seq("|", field('formula', $._exprOrTerm)))))
         ),
         field('expr', $._exprOrTerm)
       ),
@@ -224,8 +224,8 @@ module.exports = grammar({
       )
     ),
 
-    call_body:$ => seq("(", sep($._call_arg, ","), ")"),
-    unqual_agg_body:$ => seq(
+    call_body: $ => seq("(", sep($._call_arg, ","), ")"),
+    unqual_agg_body: $ => seq(
       "(",
       sep($.varDecl, ","),
       "|",
@@ -251,10 +251,10 @@ module.exports = grammar({
         )
       ),
       sep1($.varDecl, ","),
-      ),
+    ),
 
-    expr_aggregate_body: $ => seq(field('asExprs',$.asExprs), field('orderBys', optional($.orderBys))),
-    
+    expr_aggregate_body: $ => seq(field('asExprs', $.asExprs), field('orderBys', optional($.orderBys))),
+
     aggregate: $ => seq($.aggId,                                                                // Agg
       optional(
         seq("[", sep1($._exprOrTerm, ","), "]")
@@ -282,10 +282,10 @@ module.exports = grammar({
     expr_annotation: $ => seq(
       field('name', $.annotName),
       "[",
-      field('annot_arg',$.annotName),
+      field('annot_arg', $.annotName),
       "]",
-      "(", 
-      $._exprOrTerm, 
+      "(",
+      $._exprOrTerm,
       ")",
     ),
 
@@ -317,7 +317,7 @@ module.exports = grammar({
       $.range,
       $.set_literal,
       $.par_expr,                                                // ParExpr
-      $.expr_annotation, // ExprAnnotation    
+      $.expr_annotation, // ExprAnnotation
     ),
 
     literal: $ => choice(
@@ -429,8 +429,8 @@ module.exports = grammar({
     ),
 
     db_table: $ => seq(
-      repeat($.db_annotation), 
-      field('tableName',$.db_tableName), 
+      repeat($.db_annotation),
+      field('tableName', $.db_tableName),
       '(',
       sep1($.db_column, ','),
       ')',
@@ -451,8 +451,8 @@ module.exports = grammar({
 
     db_tableName: $ => $.simpleId,
 
-    db_column: $ => seq(
-      field('qldoc',optional($.qldoc)),
+    db_column: $ => seq(
+      field('qldoc', optional($.qldoc)),
       field('isUnique', optional($.db_unique)),
       field('reprType', $.db_reprType),
       field('colName', $.simpleId),
@@ -461,7 +461,7 @@ module.exports = grammar({
       field('isRef', optional($.db_ref)),
     ),
 
-    db_unionDecl: $ => seq(
+    db_unionDecl: $ => seq(
       field('base', $.dbtype),
       '=',
       sep1($.dbtype, '|'),
@@ -469,7 +469,7 @@ module.exports = grammar({
     ),
 
 
-    db_caseDecl: $ => seq(
+    db_caseDecl: $ => seq(
       $.db_case,
       field('base', $.dbtype),
       '.',
@@ -504,7 +504,7 @@ module.exports = grammar({
       $.db_string,
     ),
 
-    db_type : $ => 'type',
+    db_type: $ => 'type',
     db_subtype: $ => 'subtype',
     db_case: $ => 'case',
     db_of: $ => 'of',
@@ -519,7 +519,7 @@ module.exports = grammar({
     db_string: $ => 'string',
     db_unique: $ => 'unique',
 
-// YAML stuff below this line 
+    // YAML stuff below this line
 
     yaml_entry: $ => choice(
       $.yaml_keyvaluepair,
@@ -528,13 +528,13 @@ module.exports = grammar({
     ),
 
     yaml_comment: $ => seq(
-      "# ", 
+      "# ",
       $.yaml_value
     ),
 
     yaml_keyvaluepair: $ => seq(
       field('key', $.yaml_key),
-      ':', 
+      ':',
       field('value', $.yaml_value),
     ),
 

@@ -364,7 +364,10 @@ module.exports = grammar({
 
     varDecl: $ => seq($.typeExpr, $.varName),
 
-    moduleParam: $ => seq($.signatureExpr, $.simpleId),
+    moduleParam: $ => seq(
+      field('signature', $.signatureExpr),
+      field('parameter', $.simpleId)
+    ),
 
     asExprs: $ => sep1($.asExpr, ","),
 

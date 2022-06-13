@@ -429,7 +429,7 @@ module.exports = grammar({
     ),
 
     signatureExpr: $ => seq(
-      optional(seq($.moduleExpr, "::")),
+      optional(seq(field('qualifier', $.moduleExpr), "::")),
       field("name", $.simpleId),
       optional(seq("/", field('arity', $.integer)))
     ),

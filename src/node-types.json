@@ -3589,10 +3589,6 @@
         "required": false,
         "types": [
           {
-            "type": ",",
-            "named": false
-          },
-          {
             "type": "signatureExpr",
             "named": true
           }

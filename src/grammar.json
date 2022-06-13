@@ -2927,7 +2927,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "moduleApplication"
+          "name": "moduleInstantiation"
         },
         {
           "type": "SEQ",
@@ -2952,7 +2952,7 @@
         }
       ]
     },
-    "moduleApplication": {
+    "moduleInstantiation": {
       "type": "SEQ",
       "members": [
         {
@@ -3999,11 +3999,11 @@
     ],
     [
       "simpleId",
-      "moduleApplication"
+      "moduleInstantiation"
     ],
     [
       "className",
-      "moduleApplication"
+      "moduleInstantiation"
     ],
     [
       "moduleMember",

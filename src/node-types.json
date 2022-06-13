@@ -3613,10 +3613,6 @@
         "required": false,
         "types": [
           {
-            "type": ",",
-            "named": false
-          },
-          {
             "type": "moduleParam",
             "named": true
           }

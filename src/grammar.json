@@ -3138,8 +3138,12 @@
                   "value": "/"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "integer"
+                  "type": "FIELD",
+                  "name": "arity",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "integer"
+                  }
                 }
               ]
             },

@@ -5501,6 +5501,16 @@
     "type": "signatureExpr",
     "named": true,
     "fields": {
+      "arity": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -5513,13 +5523,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
-        {
-          "type": "integer",
-          "named": true
-        },
         {
           "type": "moduleExpr",
           "named": true

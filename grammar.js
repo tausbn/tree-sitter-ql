@@ -4,6 +4,8 @@ module.exports = grammar({
   conflicts: $ => [
     [$.simpleId, $.className],
     [$.simpleId, $.literalId],
+    [$.simpleId, $.moduleApplication],
+    [$.className, $.moduleApplication],
     [$.moduleMember, $.db_entry],
   ],
 
@@ -24,10 +26,14 @@ module.exports = grammar({
       optional(
         seq(
           "<",
-          $.moduleParam,
+          field('parameter', sep1($.moduleParam, ",")),
           ">"
         )
       ),
+      optional(seq(
+        "implements",
+        field('implements', sep1($.signatureExpr, ","))
+      )),
       choice(
         seq(
           "{",
@@ -392,7 +398,18 @@ module.exports = grammar({
 
     importModuleExpr: $ => seq($.qualModuleExpr, repeat(seq("::", field("name", $.simpleId)))),
 
-    moduleExpr: $ => choice($.simpleId, seq($.moduleExpr, "::", field("name", $.simpleId))),
+    moduleExpr: $ => choice(
+      $.simpleId,
+      $.moduleApplication,
+      seq($.moduleExpr, "::", field("name", $.simpleId))
+    ),
+
+    moduleApplication: $ => seq(
+      $._upper_id,
+      "<",
+      sep1($.signatureExpr, ","),
+      ">"
+    ),
 
     primitiveType: $ => choice('boolean', 'date', 'float', 'int', 'string'),
 

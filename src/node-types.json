@@ -3584,12 +3584,40 @@
     "type": "module",
     "named": true,
     "fields": {
+      "implements": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "signatureExpr",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
         "types": [
           {
             "type": "moduleName",
+            "named": true
+          }
+        ]
+      },
+      "parameter": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "moduleParam",
             "named": true
           }
         ]
@@ -3626,6 +3654,21 @@
     }
   },
   {
+    "type": "moduleApplication",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "signatureExpr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "moduleExpr",
     "named": true,
     "fields": {
@@ -3644,6 +3687,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "moduleApplication",
+          "named": true
+        },
         {
           "type": "moduleExpr",
           "named": true
@@ -3706,6 +3753,25 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "simpleId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "moduleParam",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "signatureExpr",
+          "named": true
+        },
         {
           "type": "simpleId",
           "named": true
@@ -5425,6 +5491,36 @@
     }
   },
   {
+    "type": "signatureExpr",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "simpleId",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "moduleExpr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "simpleId",
     "named": true,
     "fields": {}
@@ -6108,11 +6204,11 @@
   },
   {
     "type": "float",
-    "named": false
+    "named": true
   },
   {
     "type": "float",
-    "named": true
+    "named": false
   },
   {
     "type": "forall",
@@ -6128,6 +6224,10 @@
   },
   {
     "type": "if",
+    "named": false
+  },
+  {
+    "type": "implements",
     "named": false
   },
   {

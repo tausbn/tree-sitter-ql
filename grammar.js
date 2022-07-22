@@ -11,7 +11,7 @@ module.exports = grammar({
   word: $ => $._lower_id,
 
   rules: {
-    yaml: $ => repeat($.yaml_entry),
+    yaml: $ => repeat($.entry),
 
 
     simpleId: $ => choice($._lower_id, $._upper_id),
@@ -21,35 +21,35 @@ module.exports = grammar({
 
     // YAML stuff below this line
 
-    yaml_entry: $ => choice(
-      $.yaml_keyvaluepair,
-      $.yaml_listitem,
-      $.yaml_comment
+    entry: $ => choice(
+      $.keyvaluepair,
+      $.listitem,
+      $.comment
     ),
 
-    yaml_comment: $ => seq(
+    comment: $ => seq(
       "# ",
-      $.yaml_value
+      $.value
     ),
 
-    yaml_keyvaluepair: $ => seq(
-      field('key', $.yaml_key),
+    keyvaluepair: $ => seq(
+      field('key', $.key),
       ':',
-      field('value', $.yaml_value),
+      field('value', $.value),
     ),
 
-    yaml_key: $ => choice(
+    key: $ => choice(
       $.simpleId,
-      seq($.simpleId, "/", $.yaml_key),
-      seq($.simpleId, "-", $.yaml_key)
+      seq($.simpleId, "/", $.key),
+      seq($.simpleId, "-", $.key)
     ),
 
-    yaml_listitem: $ => seq(
+    listitem: $ => seq(
       '-',
-      $.yaml_value
+      $.value
     ),
 
-    yaml_value: $ => /[^\r\n]*/,
+    value: $ => /[^\r\n]*/,
   }
 });
 

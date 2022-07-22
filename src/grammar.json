@@ -6,7 +6,7 @@
       "type": "REPEAT",
       "content": {
         "type": "SYMBOL",
-        "name": "yaml_entry"
+        "name": "entry"
       }
     },
     "simpleId": {
@@ -30,24 +30,24 @@
       "type": "PATTERN",
       "value": "[a-z][A-Za-z0-9_]*"
     },
-    "yaml_entry": {
+    "entry": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "yaml_keyvaluepair"
+          "name": "keyvaluepair"
         },
         {
           "type": "SYMBOL",
-          "name": "yaml_listitem"
+          "name": "listitem"
         },
         {
           "type": "SYMBOL",
-          "name": "yaml_comment"
+          "name": "comment"
         }
       ]
     },
-    "yaml_comment": {
+    "comment": {
       "type": "SEQ",
       "members": [
         {
@@ -56,11 +56,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "yaml_value"
+          "name": "value"
         }
       ]
     },
-    "yaml_keyvaluepair": {
+    "keyvaluepair": {
       "type": "SEQ",
       "members": [
         {
@@ -68,7 +68,7 @@
           "name": "key",
           "content": {
             "type": "SYMBOL",
-            "name": "yaml_key"
+            "name": "key"
           }
         },
         {
@@ -80,12 +80,12 @@
           "name": "value",
           "content": {
             "type": "SYMBOL",
-            "name": "yaml_value"
+            "name": "value"
           }
         }
       ]
     },
-    "yaml_key": {
+    "key": {
       "type": "CHOICE",
       "members": [
         {
@@ -105,7 +105,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "yaml_key"
+              "name": "key"
             }
           ]
         },
@@ -122,13 +122,13 @@
             },
             {
               "type": "SYMBOL",
-              "name": "yaml_key"
+              "name": "key"
             }
           ]
         }
       ]
     },
-    "yaml_listitem": {
+    "listitem": {
       "type": "SEQ",
       "members": [
         {
@@ -137,11 +137,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "yaml_value"
+          "name": "value"
         }
       ]
     },
-    "yaml_value": {
+    "value": {
       "type": "PATTERN",
       "value": "[^\\r\\n]*"
     }

@@ -1,0 +1,184 @@
+=================
+table declaration
+=================
+
+/*
+ * External artifacts
+ */
+
+externalDefects(
+  unique int id : @externalDefect,
+  varchar(900) queryPath : string ref,
+  int location : @location ref,
+  varchar(900) message : string ref,
+  float severity : float ref
+);
+
+---
+(ql (block_comment) (db_entry 
+  (db_table 
+    (db_tableName (simpleId))
+    (db_column (db_unique) (db_reprType (db_int)) (simpleId) (db_colType (dbtype))) 
+    (db_column (db_reprType (db_varchar) (integer)) (simpleId) (db_colType (db_string)) (db_ref)) 
+    (db_column (db_reprType (db_int)) (simpleId) (db_colType (dbtype)) (db_ref))
+    (db_column (db_reprType (db_varchar) (integer)) (simpleId) (db_colType (db_string)) (db_ref)) 
+    (db_column (db_reprType (db_float)) (simpleId) (db_colType (db_float)) (db_ref)))))
+
+====
+case
+====
+
+case @py_dict_item.kind of
+    0 = @py_DictUnpacking
+|   1 = @py_KeyValuePair
+|   2 = @py_keyword;
+
+---
+
+(ql (db_entry
+  (db_caseDecl
+    (db_case)
+    (dbtype)
+    (simpleId)
+    (db_branch (integer) (dbtype))
+    (db_branch (integer) (dbtype))
+    (db_branch (integer) (dbtype)))))
+
+
+=====
+union
+=====
+
+@container = @folder | @file;
+
+---
+
+(ql (db_entry
+  (db_unionDecl
+    (dbtype)
+    (dbtype)
+    (dbtype))))
+
+
+
+================
+table annotation
+================
+
+#keyset[id, num]
+compilation_args(
+    int id : @compilation ref,
+    int num : int ref,
+    string arg : string ref
+);
+
+---
+
+(ql (db_entry
+  (db_table
+    (db_annotation (db_argsAnnotation (annotName) (simpleId) (simpleId)))
+    (db_tableName (simpleId))
+    (db_column (db_reprType (db_int)) (simpleId) (db_colType (dbtype))
+    (db_ref)) (db_column (db_reprType (db_int)) (simpleId) (db_colType (db_int)) (db_ref))
+    (db_column (db_reprType (db_string)) (simpleId) (db_colType (db_string)) (db_ref)))))
+
+
+
+
+
+
+
+
+
+====
+yaml
+====
+
+# Comment
+name: codeql-csharp
+version: 0.0.0
+dbscheme: semmlecode.csharp.dbscheme
+suites/whatever: codeql-suites
+extractor: csharp
+foo:
+  - bar
+  - baz
+
+---
+
+(ql
+  (yaml_entry (yaml_comment (yaml_value)))
+  (yaml_entry (yaml_keyvaluepair (yaml_key (simpleId)) (yaml_value)))
+  (yaml_entry (yaml_keyvaluepair (yaml_key (simpleId)) (yaml_value)))
+  (yaml_entry (yaml_keyvaluepair (yaml_key (simpleId)) (yaml_value)))
+  (yaml_entry (yaml_keyvaluepair (yaml_key (simpleId) (yaml_key (simpleId))) (yaml_value)))
+  (yaml_entry         
+    (yaml_keyvaluepair
+      (yaml_key (simpleId))
+      (yaml_value)))
+  (yaml_entry
+    (yaml_keyvaluepair
+      (yaml_key (simpleId))
+      (yaml_value)))
+  (yaml_entry
+    (yaml_listitem
+      (yaml_value)))
+  (yaml_entry
+    (yaml_listitem
+      (yaml_value))))
+
+
+=====================
+an actual qlpack file
+=====================
+
+name: codeql/python-all
+version: 0.0.2
+dbscheme: semmlecode.python.dbscheme
+extractor: python
+library: true
+dependencies:
+    codeql/python-upgrades: 0.0.2
+
+---
+
+  (ql
+      (yaml_entry
+        (yaml_keyvaluepair
+          (yaml_key
+            (simpleId))
+          (yaml_value)))
+      (yaml_entry
+        (yaml_keyvaluepair
+          (yaml_key
+            (simpleId))
+          (yaml_value)))
+      (yaml_entry
+        (yaml_keyvaluepair
+          (yaml_key
+            (simpleId))
+          (yaml_value)))
+      (yaml_entry
+        (yaml_keyvaluepair
+          (yaml_key
+            (simpleId))
+          (yaml_value)))
+      (yaml_entry
+        (yaml_keyvaluepair
+          (yaml_key
+            (simpleId))
+          (yaml_value)))
+      (yaml_entry
+        (yaml_keyvaluepair
+          (yaml_key
+            (simpleId))
+          (yaml_value)))
+      (yaml_entry
+        (yaml_keyvaluepair
+          (yaml_key
+            (simpleId)
+            (yaml_key
+              (simpleId)
+              (yaml_key
+                (simpleId))))
+          (yaml_value))))
